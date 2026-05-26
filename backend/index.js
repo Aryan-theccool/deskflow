@@ -33,11 +33,11 @@ app.use('/tickets', require('./routes/tickets'));
 // 404 handler
 app.use((req, res) => res.status(404).json({ error: 'Route not found' }));
 
-// Local dev server (skipped on Vercel)
-if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+// Start server unless running on Vercel (serverless)
+if (!process.env.VERCEL) {
   const PORT = process.env.PORT || 5000;
   connectDB().then(() => {
-    app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
   }).catch(err => { console.error(err.message); process.exit(1); });
 }
 
