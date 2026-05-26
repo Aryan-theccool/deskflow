@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-base: #07071a;
+  --bg-surface: #0c0c24;
+  --bg-card: #11112c;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+}
+
+html, body {
+  background-color: var(--bg-base);
+  color: #e2e8f0;
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.4); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.7); }
+
+/* Glass card */
+.glass {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+}
+.glass:hover { border-color: var(--border-hover); }
+
+/* Ticket card drag state */
+.ticket-card { transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease; }
+.ticket-card:hover { transform: translateY(-1px); border-color: rgba(99,102,241,0.35); box-shadow: 0 8px 32px rgba(99,102,241,0.1); }
+
+/* Column drop zone highlight */
+.is-dragging-over { background: rgba(99,102,241,0.06) !important; border-color: rgba(99,102,241,0.3) !important; }
+
+/* Scrollable column */
+.board-column-scroll { overflow-y: auto; flex: 1; padding-bottom: 1rem; }
+
+/* Pulse SLA badge */
+@keyframes sla-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.sla-pulse { animation: sla-pulse 2s ease-in-out infinite; }
+
+/* Toast */
+@keyframes toastIn {
+  from { transform: translate(-50%, 20px); opacity: 0; }
+  to   { transform: translate(-50%, 0);    opacity: 1; }
+}
+.toast { animation: toastIn 0.3s ease-out forwards; }
+
+/* Modal backdrop */
+.modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+  display: flex; align-items: center; justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal-box { animation: slideUp 0.25s ease-out; }
+@keyframes slideUp {
+  from { transform: translateY(24px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* Form input */
+.form-input {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #e2e8f0;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-input:focus {
+  border-color: rgba(99,102,241,0.6);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+}
+.form-input::placeholder { color: rgba(226,232,240,0.3); }
